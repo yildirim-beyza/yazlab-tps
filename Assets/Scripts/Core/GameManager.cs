@@ -20,6 +20,29 @@ public class GameManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
 
+    void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+    void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            enemies.Clear();
+            winConditionArmed = false;   // sahne baþýnda kapalý
+            StartGame();
+        }
+        else if (scene.name == "MainMenu")
+        {
+            Time.timeScale = 1f;
+            state = GameState.Menu;
+            HideAllPanels();
+        }
+    }
+
+
+    public bool winConditionArmed = false; // en az bir düþman kaydolunca true
+
+
     void Awake()
     {
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
@@ -28,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (state == GameState.Playing && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
             TogglePause();
     }
 
@@ -39,7 +62,7 @@ public class GameManager : MonoBehaviour
         HideAllPanels();
     }
 
-    public void TogglePause()
+     public void TogglePause()
     {
         if (state == GameState.Paused)
         {
@@ -58,6 +81,7 @@ public class GameManager : MonoBehaviour
     public void RegisterEnemy(GameObject e)
     {
         if (!enemies.Contains(e)) enemies.Add(e);
+        if (enemies.Count > 0) winConditionArmed = true;
     }
 
     void LateUpdate()
@@ -65,10 +89,13 @@ public class GameManager : MonoBehaviour
         if (state != GameState.Playing) return;
 
         enemies.RemoveAll(e => e == null || !e.activeInHierarchy);
-        if (enemies.Count == 0) OnWin();
+
+        // YALNIZCA en az bir düþman kaydedildiyse kazanma kontrolü yap
+        if (winConditionArmed && enemies.Count == 0) OnWin();
 
         if (player == null || !player.activeInHierarchy) OnLose();
     }
+
 
     void OnWin()
     {
