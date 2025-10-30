@@ -38,4 +38,15 @@ public class Health : MonoBehaviour
         OnDied?.Invoke();
         gameObject.SetActive(false);
     }
+
+
+    // elle can arttýrmak/azaltmak için debug
+
+    [ContextMenu("Debug: Take 10 Damage")]
+    void DebugDamage10() { TakeDamage(10); }
+
+    [ContextMenu("Debug: Heal 10")]
+    void DebugHeal10() { Heal(10); }
+
+
 }
