@@ -1,3 +1,4 @@
+ï»¿using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -20,15 +21,22 @@ public class GameManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
 
+    public bool winConditionArmed = false; // en az bir dÃ¼ÅŸman kaydolunca true
+
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        EnsureEventSystem();
+
         if (scene.name == "MainScene")
         {
             enemies.Clear();
-            winConditionArmed = false;   // sahne baþýnda kapalý
+            winConditionArmed = false;
+
+            RebindSceneRefs();
+            HideAllPanels();
             StartGame();
         }
         else if (scene.name == "MainMenu")
@@ -38,15 +46,12 @@ public class GameManager : MonoBehaviour
             HideAllPanels();
         }
     }
-
-
-    public bool winConditionArmed = false; // en az bir düþman kaydolunca true
-
-
     void Awake()
     {
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
         else { Destroy(gameObject); }
+
+        // SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Update()
@@ -62,7 +67,7 @@ public class GameManager : MonoBehaviour
         HideAllPanels();
     }
 
-     public void TogglePause()
+    public void TogglePause()
     {
         if (state == GameState.Paused)
         {
@@ -90,7 +95,7 @@ public class GameManager : MonoBehaviour
 
         enemies.RemoveAll(e => e == null || !e.activeInHierarchy);
 
-        // YALNIZCA en az bir düþman kaydedildiyse kazanma kontrolü yap
+        // YALNIZCA en az bir dÃ¼ÅŸman kaydedildiyse kazanma kontrolÃ¼ yap
         if (winConditionArmed && enemies.Count == 0) OnWin();
 
         if (player == null || !player.activeInHierarchy) OnLose();
@@ -123,5 +128,39 @@ public class GameManager : MonoBehaviour
         if (pausePanel) pausePanel.SetActive(false);
         if (winPanel) winPanel.SetActive(false);
         if (losePanel) losePanel.SetActive(false);
+    }
+
+    void RebindSceneRefs()
+    {
+        // Player
+        if (player == null)
+        {
+            var tagged = GameObject.FindWithTag("Player");
+            if (tagged) player = tagged;
+            else
+            {
+                var h = FindObjectOfType<Health>();
+                if (h) player = h.gameObject;
+            }
+        }
+
+        // Canvas & Paneller
+        var canvas = FindObjectOfType<Canvas>();
+        if (canvas)
+        {
+            pausePanel = canvas.transform.Find("PausePanel")?.gameObject;
+            winPanel = canvas.transform.Find("WinPanel")?.gameObject;
+            losePanel = canvas.transform.Find("LosePanel")?.gameObject;
+        }
+    }
+
+    void EnsureEventSystem() 
+    { 
+        if (FindObjectOfType<EventSystem>() == null) 
+        { 
+            var go = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule)); 
+            DontDestroyOnLoad(go); 
+            Debug.Log("[GM] EventSystem eksikti, oluÅŸturuldu."); 
+        } 
     }
 }

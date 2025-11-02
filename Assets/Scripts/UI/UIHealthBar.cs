@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteAlways]
 public class UIHealthBar : MonoBehaviour
 {
     public Health targetHealth;
