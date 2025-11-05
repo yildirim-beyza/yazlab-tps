@@ -7,6 +7,6 @@ public class DebugEnemySelfDestruct : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
-            Destroy(gameObject); // Kendini sil -> kalan düþman 0 ise Win açýlýr
+            Destroy(gameObject); // Kalan düþman 0 ise Win açýlýr
     }
 }

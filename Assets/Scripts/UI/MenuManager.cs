@@ -6,7 +6,6 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("MainScene");
-        // if (GameManager.Instance != null) GameManager.Instance.StartGame();
     }
 
     public void Quit()

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UIHealthBar : MonoBehaviour
 {
     public Health targetHealth;
-    public Image fillImage;   // Type = Filled, Fill Method = Horizontal
+    public Image fillImage;  
     public Text healthText;  
 
     void Start()

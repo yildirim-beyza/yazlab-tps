@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneButtons : MonoBehaviour
 {
-    //public void ReloadMainScene() => SceneManager.LoadScene("MainScene");
-    //public void LoadMainMenu() => SceneManager.LoadScene("MainMenu");
-
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
@@ -20,7 +17,6 @@ public class SceneButtons : MonoBehaviour
             GameManager.Instance.StartGame();
     }
 
-    // 🔹 YENİ: Retry tuşu için
     public void RetryGame()
     {
         SceneManager.LoadScene("MainScene");
@@ -34,6 +30,6 @@ public class SceneButtons : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Oyun kapatıldı."); // Editörde test için
+        Debug.Log("Oyun kapatıldı.");
     }
 }

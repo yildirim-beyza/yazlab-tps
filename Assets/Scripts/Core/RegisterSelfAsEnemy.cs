@@ -21,12 +21,3 @@ public class RegisterSelfAsEnemy : MonoBehaviour
         Debug.Log($"[Enemy] Kaydedildi: {gameObject.name}");
     }
 }
-
-
-
-/* void /* OnEnable()
-{
-    if (GameManager.Instance != null)
-        GameManager.Instance.RegisterEnemy(gameObject);
-}
-}*/

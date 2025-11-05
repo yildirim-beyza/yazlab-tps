@@ -5,7 +5,7 @@ public class UICursorHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [Header("Cursor")]
     public Texture2D handCursor;
-    public Vector2 hotspot = new Vector2(8, 0); // elin týklanan noktasý (baþparmak ucu gibi)
+    public Vector2 hotspot = new Vector2(8, 0); 
 
     public void OnPointerEnter(PointerEventData _)
     {
@@ -14,7 +14,7 @@ public class UICursorHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData _)
     {
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); // varsayýlan
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); 
     }
 
     void OnDisable() => Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);

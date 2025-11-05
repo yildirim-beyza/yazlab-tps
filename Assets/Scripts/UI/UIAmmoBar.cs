@@ -40,16 +40,14 @@ public class UIAmmoBar : MonoBehaviour
             float ratio = clipSize > 0 ? (float)currentClip / clipSize : 0f;
             fillImage.fillAmount = ratio;
 
-            // Renkler (mutlak eþikler)
             if (currentClip <= 3)
-                fillImage.color = Color.red;
+                fillImage.color = Color.red;  // kýrmýzý
             else if (currentClip <= 7)
                 fillImage.color = new Color(1f, 0.6f, 0f); // turuncu
             else
                 fillImage.color = new Color(1f, 0.84f, 0f); // sarý
         }
 
-        // Metin(ler)
         if (ammoText)
             ammoText.text = $"{currentClip} / {clipSize}  (+{reserve})";
     }

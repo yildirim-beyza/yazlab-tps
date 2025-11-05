@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
 
-    public bool winConditionArmed = false; // en az bir düşman kaydolunca true
+    public bool winConditionArmed = false; 
 
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -50,8 +50,6 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
         else { Destroy(gameObject); }
-
-        // SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Update()
@@ -95,7 +93,6 @@ public class GameManager : MonoBehaviour
 
         enemies.RemoveAll(e => e == null || !e.activeInHierarchy);
 
-        // YALNIZCA en az bir düşman kaydedildiyse kazanma kontrolü yap
         if (winConditionArmed && enemies.Count == 0) OnWin();
 
         if (player == null || !player.activeInHierarchy) OnLose();
@@ -132,7 +129,6 @@ public class GameManager : MonoBehaviour
 
     void RebindSceneRefs()
     {
-        // Player
         if (player == null)
         {
             var tagged = GameObject.FindWithTag("Player");
@@ -144,7 +140,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // Canvas & Paneller
         var canvas = FindObjectOfType<Canvas>();
         if (canvas)
         {

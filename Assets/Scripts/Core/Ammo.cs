@@ -8,15 +8,15 @@ public class Ammo : MonoBehaviour
     [Header("Ammo Ayarlarý")]
     public int clipSize = 15;         // Þarjör kapasitesi
     public int currentClip = 15;      // Oyuna dolu þarjörle baþlasýn
-    public int reserveAmmo = 15;      // Yedekteki mermiler (toplam 45 mermi)
+    public int reserveAmmo = 15;      // Yedekteki mermiler (toplam 30 mermi)
     public float reloadTime = 1.4f;   // Yeniden doldurma süresi (saniye)
     public bool isReloading = false;
 
-    public event Action<int, int, int> OnAmmoChanged; // currentClip, clipSize, reserveAmmo
+    public event Action<int, int, int> OnAmmoChanged;
 
     void Start()
     {
-        Raise(); // oyun baþlarken UI’yý güncelle
+        Raise(); 
     }
 
     public bool CanShoot() => !isReloading && currentClip > 0;
