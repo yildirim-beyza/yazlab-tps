@@ -8,9 +8,9 @@ Proje, YAZILIM GELİŞTİRME LABORATUVARI I dersi kapsamında Unity 6 (6000.2.8f
 ---
 
 ## 👥 Üyeler:
-• Eren Dağlı | 231307033 – Player Mekanikleri: Hareket, kamera, nişan, ateş etme, animasyonlar
-• Yusuf Can Müştekin | 231307082 – Yapay Zekâ & Level: Zombi FSM, NavMesh, çevre tasarımı
-• Beyza Yıldırım | 241307135 – Sistem & UI: Health sistemi, GameManager, UI/menüler, sahne yönetimi
+• Eren Dağlı | 231307033 – Player Mekanikleri: Hareket, kamera, nişan, ateş etme, animasyonlar   
+• Yusuf Can Müştekin | 231307082 – Yapay Zekâ & Level: Zombi FSM, NavMesh, çevre tasarımı   
+• Beyza Yıldırım | 241307135 – Sistem & UI: Health sistemi, GameManager, UI/menüler, sahne yönetimi   
 
 ---
 
